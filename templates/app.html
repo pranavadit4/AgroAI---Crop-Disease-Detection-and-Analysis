@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAI - Smart Crop Disease Detection and Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="app.js" defer></script>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary: #FFC107;
+            --light: #F5F5F5;
+            --dark: #212121;
+            --gray: #757575;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: "\f06c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        
+        section {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+        
+        p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+        
+        /* Upload Container Styles */
+        .upload-container {
+            flex: 1.5;
+            min-width: 350px;
+        }
+        
+        .container {
+            width: 100%;
+        }
+        
+        .img-area {
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            background-color: #f5faf5;
+            transition: all 0.3s ease;
+        }
+        
+        .img-area:hover {
+            border-color: var(--primary-dark);
+        }
+        
+        .img-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .img-area h3 {
+            color: var(--primary);
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .img-area.active {
+            border-color: var(--primary-dark);
+            background-color: #e8f5e9;
+        }
+        
+        .preview-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #FFB300;
+            transform: translateY(-2px);
+        }
+        
+        /* Result Styles */
+        .result {
+            text-align: center;
+        }
+        
+        .image_display {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .result-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .description {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .upload-another {
+            margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .flex-container {
+                flex-direction: column;
+            }
+            
+            section {
+                min-width: 100%;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 class="logo">AgroAI</h2>
+    </header>
+
+    <main>
+        <div class="flex-container">
+            <section class="about-section">
+                <h2><i class="fas fa-leaf"></i> About AgroAI</h2>
+                <p>AgroAI helps farmers identify crop diseases through AI-powered image recognition. Upload a plant image to get instant health analysis and management recommendations.</p>
+
+                <h3><i class="fas fa-bug"></i> Top 5 Crop Diseases in India</h3>
+                <ul>
+                    <li><i class="fas fa-circle small-icon"></i> Bacterial Blight</li>
+                    <li><i class="fas fa-circle small-icon"></i> Powdery Mildew</li>
+                    <li><i class="fas fa-circle small-icon"></i> Rust Disease</li>
+                    <li><i class="fas fa-circle small-icon"></i> Fusarium Wilt</li>
+                    <li><i class="fas fa-circle small-icon"></i> Downy Mildew</li>
+                </ul>
+            </section>
+
+            <section class="upload-container">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Disease Detection</h2>
+                <p>Upload an image of your crop to analyze its health status.</p>
+                <div class="container" align="center">
+                    {% if file_path %}
+                        <div class="result" align="center">
+                            <h2 class="image_display"><i class="fas fa-diagnoses"></i> {{ label }}</h2>
+                            <img class="result-image" src="{{ url_for('static', filename=file_path) }}" alt="Uploaded Image">
+                            <p class="description">{{ description }}</p>
+                            <button class="btn btn-primary upload-another" type="button" onclick="window.location.href='/'">
+                                <i class="fas fa-upload"></i> Upload Another Image
+                            </button>
+                        </div>
+                    {% else %}
+                        <form action="/" method="post" enctype="multipart/form-data">
+                            <input type="file" id="file" name="file" accept="image/*" hidden>
+                            <div class="img-area" data-img="">
+                                <i class="fas fa-images"></i>
+                                <h3>Select Crop Image</h3>
+                                <img id="previewImg" src="" alt="Image Preview" class="preview-img" style="display:none;">
+                            </div>
+                            <div class="button-group">
+                                <button class="btn btn-primary select-image" type="button">
+                                    <i class="fas fa-folder-open"></i> Select Image
+                                </button>
+                                <button class="btn btn-secondary submit-image" type="submit">
+                                    <i class="fas fa-search"></i> Analyze
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="how-it-works-section">
+                <h2><i class="fas fa-question-circle"></i> How It Works</h2>
+                <ol>
+                    <li><strong>Select an Image:</strong> Choose a clear picture of your plant.</li>
+                    <li><strong>Upload the Image:</strong> Our AI will analyze the image.</li>
+                    <li><strong>Get Results:</strong> Receive diagnosis and treatment recommendations.</li>
+                </ol>
+
+                <h3><i class="fas fa-seedling"></i> Top 5 Fertilizers</h3>
+                <ul>
+                    <li><i class="fas fa-tint"></i> Urea</li>
+                    <li><i class="fas fa-tint"></i> DAP (Diammonium Phosphate)</li>
+                    <li><i class="fas fa-tint"></i> Potassium Chloride</li>
+                    <li><i class="fas fa-tint"></i> Ammonium Sulfate</li>
+                    <li><i class="fas fa-tint"></i> Calcium Nitrate</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const fileInput = document.getElementById('file');
+        const selectImageBtn = document.querySelector('.select-image');
+        const previewImg = document.getElementById('previewImg');
+        const imgArea = document.querySelector('.img-area');
+
+        selectImageBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imgArea.classList.add('active');
+                    imgArea.querySelector('i').style.display = 'none';
+                    imgArea.querySelector('h3').style.display = 'none';
+                    
+                    previewImg.src = event.target.result;
+                    previewImg.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
