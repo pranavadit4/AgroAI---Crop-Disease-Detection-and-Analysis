@@ -1,0 +1,206 @@
+/* styles.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Afacad+Flux&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Afacad Flux', sans-serif; /* Updated font */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
+    background-color: #f0f4ff; /* Light blue background */
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #2196F3; /* Blue header */
+    color: white;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Audiowide', cursive; /* Using Audiowide for the logo */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the start */
+    margin-top: 2rem;
+    width: 100%; /* Ensure it takes full width */
+}
+
+.about-section,
+.how-it-works-section {
+    width: 30%; /* Adjust width as necessary */
+    padding: 2rem;
+    background-color: #ffffff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-section h2,
+.how-it-works-section h2 {
+    color: #1976D2; /* Darker blue for headings */
+}
+
+.about-section p,
+.how-it-works-section ol,
+.about-section ul,
+.how-it-works-section ul {
+    color: #555; /* Darker grey for text */
+}
+
+.how-it-works-section ol,
+.how-it-works-section ul {
+    padding-left: 1.5rem;
+}
+
+.upload-container {
+    max-width: 500px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.upload-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.upload-container h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #1976D2; /* Darker blue for headings */
+}
+
+.container {
+    width: 100%;
+}
+
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-color: #f7f9fc; /* Light background for upload area */
+    border: 2px dashed #90caf9; /* Light blue dashed border */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.img-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.preview-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700; /* Bolder text */
+    transition: background-color 0.3s ease;
+    font-family: 'Afacad Flux', sans-serif; /* Using updated font for buttons */
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: #2196F3;
+    border: 2px solid #2196F3;
+}
+
+.btn-secondary:hover {
+    background-color: #e0f7fa; /* Light blue on hover */
+}
+
+.result-container {
+    max-width: 500px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 2rem; /* Add some margin for spacing */
+    display: flex; /* Use flex for centering */
+    flex-direction: column; /* Align items in a column */
+    align-items: center; /* Center items horizontally */
+}
+
+.prediction-card {
+    margin-bottom: 2rem;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prediction-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.result-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 2px solid #4CAF50;
+}
+
+.description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+}
