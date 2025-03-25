@@ -40,8 +40,8 @@ The model currently supports detection for:
 ## Installation 🚀
 
 1. Clone the repository:
-git clone https://github.com/yourusername/CropDoc.git
-cd CropDoc
+git clone https://github.com/yourusername/AgroAI - Crop Disease Detection and Analysis.git
+cd AgroAI
 
 2. Create and activate a virtual environment:
 python -m venv venv
@@ -56,12 +56,13 @@ https://drive.google.com/file/d/1TiRy-SncsPnhtO0NdcX0DgU5IC83BZgQ/view?usp=shari
 5. Run the application:
 python app.py
 
-6.Open your browser and navigate to:
+6. Open your browser and navigate to:
 http://localhost:5000
 
 # Contributing 🤝
 Contributions are welcome! Please follow these steps:
 Fork the repository
+
 Create your feature branch (git checkout -b feature/AmazingFeature)
 
 Commit your changes (git commit -m 'Add some AmazingFeature')
